@@ -17,7 +17,16 @@ strcmp_loop:
 		jmp strcmp_loop
 
 strcmp_end:
-		sub cl, dl
+		cmp cl, dl
+		ja strcmp_return_one;
+		jb strcmp_return_minus;
 		mov rax, 0x0
-		mov al, cl
+		ret
+
+strcmp_return_one:
+		mov rax, 0x1
+		ret
+
+strcmp_return_minus:
+		mov rax, -0x1
 		ret
